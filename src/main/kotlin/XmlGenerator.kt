@@ -26,6 +26,7 @@ class XmlGenerator (private val lines : Array<String>) {
                 "P" ->{
                     if (inFamily){
                         currentPerson.family.add(currentFamily)
+                        println(currentFamily)
                         currentFamily = Family()
                         inFamily = false
                     }
@@ -33,16 +34,21 @@ class XmlGenerator (private val lines : Array<String>) {
                         people.person.add(currentPerson)
                         currentPerson = Person()
                     }
-                    currentPerson.firstname = lineArray[1].trim()
-                    currentPerson.lastname = lineArray[2].trim()
+                    if (lineArray.size >= 2 && lineArray[1].isNotBlank()) currentPerson.firstname = lineArray[1].trim()
+                    if (lineArray.size >= 3 && lineArray[2].isNotBlank()) currentPerson.lastname = lineArray[2].trim()
                     inPerson = true
                 }
                 "T" -> {
-                    var phone = Phone(lineArray[1].trim(), if (lineArray.size >= 3) lineArray[2].trim() else null)
+                    var phone = Phone(
+                        if (lineArray.size >= 2 && lineArray[1].isNotBlank()) lineArray[1].trim() else null,
+                        if (lineArray.size >= 3 && lineArray[2].isNotBlank()) lineArray[2].trim() else null)
                     if (inFamily) currentFamily.phone = phone else currentPerson.phone = phone
                 }
                 "A" -> {
-                    var address = Address(lineArray[1].trim(), if (lineArray.size >= 3) lineArray[2].trim() else null, if (lineArray.size >= 4) lineArray[3].trim() else null)
+                    var address = Address(
+                        if (lineArray.size >= 2 && lineArray[1].isNotBlank()) lineArray[1].trim() else null,
+                        if (lineArray.size >= 3 && lineArray[2].isNotBlank()) lineArray[2].trim() else null,
+                        if (lineArray.size >= 4 && lineArray[3].isNotBlank()) lineArray[3].trim() else null)
                     if (inFamily) currentFamily.address = address else currentPerson.address = address
                 }
                 "F" -> {
@@ -51,7 +57,8 @@ class XmlGenerator (private val lines : Array<String>) {
                         currentFamily = Family()
                     }
                     inFamily = true
-                    currentFamily.name = lineArray[1].trim()
+                    if (lineArray.size >= 2 && lineArray[1].isNotBlank()) currentFamily.name = lineArray[1].trim()
+                    if (lineArray.size >= 3 && lineArray[2].isNotBlank()) currentFamily.born = lineArray[2].trim()
                 }
             }
         }

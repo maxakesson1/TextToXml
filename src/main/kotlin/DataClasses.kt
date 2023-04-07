@@ -12,9 +12,9 @@ data class People(
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class Person(
     @JacksonXmlProperty(localName = "firstname")
-    var firstname: String = "",
+    var firstname: String? = null,
     @JacksonXmlProperty(localName = "lastname")
-    var lastname: String = "",
+    var lastname: String? = null,
     @JacksonXmlProperty(localName = "address")
     var address: Address? = null,
     @JacksonXmlProperty(localName = "phone")
@@ -23,6 +23,7 @@ data class Person(
     @JacksonXmlProperty(localName = "family")
     val family: MutableList<Family> = mutableListOf()
 )
+
 data class Address(
     @JacksonXmlProperty(localName = "street")
     val street: String? = null,
@@ -39,7 +40,9 @@ data class Phone(
 )
 data class Family(
     @JacksonXmlProperty(localName = "name")
-    var name: String = "",
+    var name: String? = null,
+    @JacksonXmlProperty(localName = "born")
+    var born: String? = null,
     @JacksonXmlProperty(localName = "address")
     var address: Address? = null,
     @JacksonXmlProperty(localName = "phone")
