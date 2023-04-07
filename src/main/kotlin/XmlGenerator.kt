@@ -26,7 +26,6 @@ class XmlGenerator (private val lines : Array<String>) {
                 "P" ->{
                     if (inFamily){
                         currentPerson.family.add(currentFamily)
-                        println(currentFamily)
                         currentFamily = Family()
                         inFamily = false
                     }

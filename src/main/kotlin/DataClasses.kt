@@ -23,7 +23,6 @@ data class Person(
     @JacksonXmlProperty(localName = "family")
     val family: MutableList<Family> = mutableListOf()
 )
-
 data class Address(
     @JacksonXmlProperty(localName = "street")
     val street: String? = null,
