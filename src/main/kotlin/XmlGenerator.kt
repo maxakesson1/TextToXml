@@ -48,7 +48,7 @@ class XmlGenerator (private val lines : Array<String>) {
                         if (lineArray.size >= 2 && lineArray[1].isNotBlank()) lineArray[1].trim() else null,
                         if (lineArray.size >= 3 && lineArray[2].isNotBlank()) lineArray[2].trim() else null,
                         if (lineArray.size >= 4 && lineArray[3].isNotBlank()) lineArray[3].trim() else null)
-                    if (inFamily) currentFamily.address = address else currentPerson.address = address
+                    if (inFamily) currentFamily.address.add(address) else currentPerson.address.add(address)
                 }
                 "F" -> {
                     if (inFamily){

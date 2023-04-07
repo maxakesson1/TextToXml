@@ -15,8 +15,9 @@ data class Person(
     var firstname: String? = null,
     @JacksonXmlProperty(localName = "lastname")
     var lastname: String? = null,
+    @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "address")
-    var address: Address? = null,
+    var address: MutableList<Address> = mutableListOf(),
     @JacksonXmlProperty(localName = "phone")
     var phone: Phone? = null,
     @JacksonXmlElementWrapper(useWrapping = false)
@@ -42,8 +43,9 @@ data class Family(
     var name: String? = null,
     @JacksonXmlProperty(localName = "born")
     var born: String? = null,
+    @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "address")
-    var address: Address? = null,
+    var address: MutableList<Address> = mutableListOf(),
     @JacksonXmlProperty(localName = "phone")
     var phone: Phone? = null
 )
